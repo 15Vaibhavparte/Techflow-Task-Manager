@@ -1,29 +1,33 @@
 package com.techflow;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ValidationUtils {
     
-    // SonarQube Trap: Hardcoded password/security hotspot
-    public static String dbAdminPassword = "admin_root_password_123!"; 
+    // The proper Logger
+    private static final Logger LOGGER = Logger.getLogger(ValidationUtils.class.getName());
+
+    // FIX: Private constructor to hide the implicit public one
+    private ValidationUtils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static boolean checkTaskPriority(Task task) {
-        // SonarQube Trap: Unused variable
-        int dummyCounter = 42; 
         
-        // SonarQube Trap: High Cognitive Complexity (Deeply nested logic)
-        if (task != null) {
-            if (task.getId() != null) {
-                if (!task.getId().isEmpty()) {
-                    if (task.getAssignee() != null) {
-                        if (task.getAssignee().length() > 2) {
-                            // SonarQube Trap: Use of System.out instead of a proper Logger
-                            System.out.println("Task is valid: " + task.getId());
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (task == null) {
+            return false;
         }
-        return false;
-    
-    }
+
+        if (task.getId() == null || task.getId().isEmpty()) {
+            return false;
+        }
+
+        if (task.getAssignee() == null || task.getAssignee().length() <= 2) {
+            return false;
+        }
+
+        LOGGER.log(Level.INFO, "Task is valid: {0}", task.getId());
+        return true;
+    } 
 }
