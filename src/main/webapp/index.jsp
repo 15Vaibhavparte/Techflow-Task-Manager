@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +10,7 @@
         th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
         th { background-color: #0056b3; color: white; }
         .btn { display: inline-block; padding: 10px 15px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; }
+        caption { padding: 10px; font-weight: bold; font-size: 1.2em; color: #333; text-align: left; }
     </style>
 </head>
 <body>
@@ -26,6 +26,7 @@
                 com.techflow.Task t2 = (com.techflow.Task) request.getAttribute("task2");
         %>
             <table>
+                <caption>Current active engineering tasks and assignments</caption>
                 <tr>
                     <th>Task ID</th>
                     <th>Description</th>
