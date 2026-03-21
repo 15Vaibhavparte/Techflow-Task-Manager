@@ -1,5 +1,4 @@
-
-FROM openjdk:21-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
 COPY target/task-manager-1.1-SNAPSHOT.war /app/task-manager.war
 EXPOSE 5555
