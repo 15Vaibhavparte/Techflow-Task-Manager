@@ -6,7 +6,7 @@
 
     <groupId>com.techflow</groupId>
     <artifactId>techflow-task-manager</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
