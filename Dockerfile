@@ -1,15 +1,20 @@
 FROM tomcat:9.0-jdk21-temurin-jammy
 
-# 1. Clear out default Tomcat apps
+# 1. Create the restricted user
+RUN groupadd -r tomcatgroup && useradd -r -g tomcatgroup tomcatuser
+
+WORKDIR /usr/local/tomcat/webapps/
+
+# 2. Clean and set permissions for the server folders
 RUN rm -rf /usr/local/tomcat/webapps/*
+RUN chown -R tomcatuser:tomcatgroup /usr/local/tomcat
 
-# 2. Copy your artifact and rename it to ROOT.war
-# This ensures your TechFlow app is the "Home Page"
-COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+# 3. Securely copy the application artifact
+COPY --chown=tomcatuser:tomcatgroup target/*.war /usr/local/tomcat/webapps/ROOT.war
 
-# 3. Expose the standard Tomcat port
+# 4. Switch to the non-root user (SonarQube will now give you a Green check!)
+USER tomcatuser
+
 EXPOSE 8080
 
-# 4. The Correct ENTRYPOINT
-# This starts the Tomcat server in the foreground
 ENTRYPOINT ["catalina.sh", "run"]
