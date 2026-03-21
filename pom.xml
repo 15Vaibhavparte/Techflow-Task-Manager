@@ -31,6 +31,18 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.44.v20210922</version>
+                <configuration>
+                  <scanIntervalSeconds>10</scanIntervalSeconds>
+                  <webApp>
+                    <contextPath>/</contextPath>
+                  </webApp>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -42,6 +54,14 @@
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+	        <id>maven-releases</id>
+	        <url>Nexus URL</url>
+        </repository>
+        <snapshotRepository>
+	        <id>maven-snapshots</id>
+	        <url>Nexus URL/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
