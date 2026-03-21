@@ -1,5 +1,11 @@
-FROM eclipse-temurin:21-jdk-alpine
-WORKDIR /app
-COPY target/*.war /app/task-manager.war
-EXPOSE 5555
-ENTRYPOINT ["java", "-jar", "task-manager.war"]
+FROM tomcat:9.0-jdk21-temurin-jammy
+
+WORKDIR /usr/local/tomcat/webapps/
+
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "catalina.sh", "run"]
