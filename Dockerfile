@@ -6,7 +6,13 @@ WORKDIR /usr/local/tomcat/webapps/
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+RUN chown -R tomcatuser:tomcatgroup /usr/local/tomcat
+
+COPY --chown=tomcatuser:tomcatgroup target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+USER tomcatuser
+
+COPY --chown=tomcatuser:tomcatgroup target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 
