@@ -9,7 +9,7 @@ This repository demonstrates a complete, production-ready Continuous Integration
 - **Cloud Provider:** AWS EC2 (Ubuntu 24.04, t2.large, 28GB EBS)
 - **CI/CD Server:** Jenkins
 - **Containerization:** Docker
-- **Artifact Repository:** Sonatype Nexus Repository Manager 3
+- **Artifact Repository:** Sonatype Nexus Repository Manager
 - **Build Tool:** Apache Maven
 - **Language:** Java (JDK 17 / JDK 21)
 
@@ -23,6 +23,7 @@ Before starting, ensure your AWS EC2 instance has the following inbound security
 - `8080` (Jenkins Default)
 - `8081` (Nexus Default)
 - `80`, `443` (HTTP/HTTPS)
+<img width="1916" height="1074" alt="Screenshot 2026-03-21 180904" src="https://github.com/user-attachments/assets/b4afdb5a-6e84-478b-af31-2d9826e98a5e" />
 
 ---
 
@@ -52,6 +53,9 @@ sudo apt-get install jenkins -y
 ```
 http://<YOUR_EC2_PUBLIC_IP>:8080
 ```
+<img width="1919" height="1077" alt="Screenshot 2026-03-21 181350" src="https://github.com/user-attachments/assets/f0461c2d-3dfb-404d-8c8b-662d25378135" />
+
+
 ## Phase 2: Docker Installation
 ```
 # Install dependencies
@@ -81,12 +85,16 @@ docker-buildx-plugin docker-compose-plugin -y
 ```
 sudo docker run -d --name nexus3 -p 8081:8081 sonatype/nexus3
 ```
+<img width="1919" height="1079" alt="Screenshot 2026-03-21 180746" src="https://github.com/user-attachments/assets/ddb3a19c-46c8-4b35-8671-4ec78dc8889d" />
+
 ### 🔑 Get Initial Admin Password
 ```
 sudo docker exec -it nexus3 /bin/bash
 cat sonatype-work/nexus3/admin.password
 exit
 ```
+<img width="1915" height="1079" alt="Screenshot 2026-03-21 180440" src="https://github.com/user-attachments/assets/138356fa-5d67-4d61-a42a-705d46617e22" />
+
 
 ### 👉 Access Nexus
 
@@ -95,6 +103,9 @@ exit
 - Use retrieved password
 - Set a new password
 - Enable anonymous access
+<img width="1918" height="1079" alt="Screenshot 2026-03-21 180852" src="https://github.com/user-attachments/assets/72d110db-d5e8-45bd-a52f-3d0486ddb955" />
+<img width="1919" height="1079" alt="Screenshot 2026-03-21 192058" src="https://github.com/user-attachments/assets/8a600ab0-ba1f-483b-9ecb-e367d5038ff5" />
+<img width="1915" height="1077" alt="Screenshot 2026-03-21 192111" src="https://github.com/user-attachments/assets/4d617ab7-3d6d-4fc2-ae3e-d332b942f3f7" />
 
 ---
 
@@ -220,7 +231,8 @@ pipeline {
     }
 }
 ```
-
+<img width="1919" height="1079" alt="Screenshot 2026-03-21 191118" src="https://github.com/user-attachments/assets/017a640c-0cb7-4e92-8799-33f4f7f154cd" />
+<img width="1919" height="1079" alt="Screenshot 2026-03-21 194142" src="https://github.com/user-attachments/assets/7ab7e85a-26ca-4a4f-b27b-f4d8e99cd245" />
 ## 🔧 Troubleshooting: Nexus Deployment Policies
 If you redeploy the same version (e.g., 0.0.2), Nexus blocks it by default.
 
@@ -242,6 +254,8 @@ Change:
 **Deployment to Nexus repository**
 
 **It provides a production-ready CI/CD workflow using Jenkins, Docker, and Nexus.**
+
+https://github.com/user-attachments/assets/d836ee8b-2e8c-4287-b4f2-a5102ce4e95f
 
 
 ---
