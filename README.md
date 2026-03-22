@@ -88,46 +88,57 @@ cat sonatype-work/nexus3/admin.password
 exit
 ```
 
-### 👉 Access Nexus:
-```
-http://<YOUR_EC2_PUBLIC_IP>:8081
-```
- ● Login: admin
- ● Use retrieved password
- ● Set new password
- ● Enable anonymous access
+### 👉 Access Nexus
 
+- **URL:** `http://<YOUR_EC2_PUBLIC_IP>:8081`
+- **Login:** `admin`
+- Use retrieved password
+- Set a new password
+- Enable anonymous access
+
+---
 
 ## ⚙️ Phase 4: Jenkins Plugin & Tool Configuration
+
 ### 🔌 Install Plugins
 
-#### Go to:
-Manage Jenkins → Plugins → Available
+Navigate to:  
+**Manage Jenkins → Plugins → Available**
 
-#### Install:
-● Config File Provider
-● Maven Integration
-● Eclipse Temurin Installer
-● Pipeline Maven Integration
+Install the following:
 
-## 🧰 Configure Tools
+- Config File Provider  
+- Maven Integration  
+- Eclipse Temurin Installer  
+- Pipeline Maven Integration  
 
-#### Go to:
-Manage Jenkins → Tools
+---
 
-● JDK
-  ● Name: jdk17
-  ● Version: jdk-17.0.11+9
-● Maven
-  ● Name: maven3
-  ● Version: Latest
+### 🧰 Configure Tools
 
-## 🔐 Configure Nexus Credentials
+Navigate to:  
+**Manage Jenkins → Tools**
 
-#### Go to:
-Manage Jenkins → Managed Files
-Add Global Maven settings.xml:
-```
+#### JDK Configuration
+
+- **Name:** `jdk17`
+- **Version:** `jdk-17.0.11+9`
+
+#### Maven Configuration
+
+- **Name:** `maven3`
+- **Version:** Latest
+
+---
+
+### 🔐 Configure Nexus Credentials
+
+Navigate to:  
+**Manage Jenkins → Managed Files**
+
+Add a **Global Maven `settings.xml`**:
+
+```xml
 <servers>
     <server>
         <id>maven-releases</id>
@@ -142,10 +153,11 @@ Add Global Maven settings.xml:
 </servers>
 ```
 
-## 📦 Phase 5: Application Configuration (pom.xml)
+## 📦 Phase 5: Application Configuration (`pom.xml`)
 
-Add this block:
-```
+Add the following block:
+
+```xml
 <distributionManagement>
     <repository>
         <id>maven-releases</id>
@@ -158,7 +170,7 @@ Add this block:
 </distributionManagement>
 ```
 
-## 🚀 Phase 6: Jenkins Pipeline (Jenkinsfile)
+## 🚀 Phase 6: Jenkins Pipeline (`Jenkinsfile`)
 ```
 pipeline {
     agent any
@@ -213,22 +225,23 @@ pipeline {
 If you redeploy the same version (e.g., 0.0.2), Nexus blocks it by default.
 
 ✅ Fix (For Testing Only)
-Go to Nexus → Settings (⚙️) → Repositories
-Select maven-releases
+** Go to Nexus → Settings (⚙️) → Repositories **
+Select ` maven-releases `
 Change:
-Layout Policy: Permissive
-Deployment Policy: Allow redeploy
-Save
-🎯 Summary
+**Layout Policy: Permissive** 
+**Deployment Policy: Allow redeploy**
+**Save**
 
-This pipeline automates:
+## 🎯 Summary
 
-Code checkout from GitHub
-Compilation & testing
-Packaging artifacts
-Deployment to Nexus repository
+**This pipeline automates:** 
 
-It provides a production-ready CI/CD workflow using Jenkins, Docker, and Nexus.
+**Code checkout from GitHub**
+**Compilation & testing**
+**Packaging artifacts**
+**Deployment to Nexus repository**
+
+**It provides a production-ready CI/CD workflow using Jenkins, Docker, and Nexus.**
 
 
 ---
