@@ -4,7 +4,7 @@ name: Deploy techfloe to ec2 instance.
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
     deploy:
