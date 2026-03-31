@@ -2,7 +2,7 @@
 name: Deploy techflow to ec2 instance.
 
 on:
-  push:
+ # push:
     branches:
       - master
 
