@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="dashboard">
-        <h2>TechFlow Engineering Dashboard</h2>
+        <h2>TechFlow  Dashboard</h2>
         <p>Status: <strong>All Systems Operational</strong></p>
         
         <p><a href="dashboard" class="btn">Load Current Tasks</a></p>
